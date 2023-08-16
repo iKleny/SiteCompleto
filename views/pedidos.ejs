@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus pedidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <div class="border border-muted bg-dark">
+        <div class="d-flex justify-content-end">
+            <a href="/logout" class="btn btn-danger me-2 mt-2">Sair</a>
+            <a href="/verif" class="btn btn-primary mt-2 me-2">Continuar comprando</a>
+        </div>
+        <div class="d-flex justify-content-center mt-2 mb-2">
+            <h2 class="text-white">Histórico</h2>
+        </div>
+        
+    </div>
+
+    <div class="table-responsive-xl">
+        <table class="container table table-hover table-striped table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Qnt</th>
+                    <th scope="col">Pagamento</th>
+                    <th scope="col">Pedido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < array.length; i++) { %>
+                    <tr>
+                        <td class="text-capitalize"><%= array[i].produto %></td>
+                        <td><%= array[i].valor %></td>
+                        <td><%= array[i].quantidade %></td>
+                        <td class="text-capitalize"><%= array[i].pagamento %></td>
+                        <td class="text-capitalize"><%= array[i].pedido %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

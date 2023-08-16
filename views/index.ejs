@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="/scripts/search.js" defer></script>
+</head>
+<body class="container-fluid">
+
+    <header class="p-3 bg-dark text-white mb-1">
+        <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Contatos</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Promoções</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input id="pesquisa" type="search" class="form-control form-control-dark" placeholder="Buscar produto">
+            </form>
+
+            <div class="text-end">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-outline-light me-2">Login</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#cadastro" class="btn btn-warning">Cadastrar</button>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <main class="d-flex flex-wrap justify-content-center justify-content-md-start">
+
+        <% for(let i = 0; i < array.length; i++) { %>
+            <% const imagePath = array[i].imagem.replace('public/', ''); %>
+            <div class="card border border-dark border-1 ms-1 searchable-content mb-1" style="width: 10rem;">
+                <div class="image-container" style="height: 180px;">
+                    <img class="card-img-top" src="<%= imagePath %>" alt="imagem do produto">
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title text-secondary text-capitalize"><%= array[i].produto %></h5>
+                    <p class="card-text border-bottom border-1 border-dark"><%= array[i].desc_produto %></p>
+                    <h4 class="card-text">R$ <%= array[i].valor %></h4>
+                    <button type="button" class="btn btn-lg btn-success mt-3" data-bs-toggle="modal" data-bs-target="#login">Comprar</button>
+                </div>
+            </div>
+
+        <% } %>
+
+    </main>
+
+            <!-- Modal login-->
+    <div class="modal fade" id="login">
+
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body bg-light">
+        
+                         <!--corpo login-->
+                <form action="/authent" method="post">
+                    <div class="form-outline mb-4">
+                        <input name="login" type="text" id="login" class="form-control" />
+                        <label class="form-label" for="login">Login</label>
+                    </div>
+                                  
+                    <div class="form-outline mb-4">
+                        <input name="password" type="password" id="password" class="form-control" />
+                        <label class="form-label" for="password">Senha</label>
+                    </div>
+                                  
+                    <div class="row mb-4">
+                                  
+                        <div class="col d-flex justify-content-center">
+                        <a href="/forgotpass">Esqueceu sua senha?</a>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center ">
+                        <button type="submit" class="btn btn-primary mb-4">Login</button>
+                    </div>
+                </form>
+            </div>
+            </div>  
+            </div>
+    </div>
+        
+                <!-- Modal cadastro-->
+    <div class="modal fade" id="cadastro">
+        
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal">
+                 </button>
+            </div>
+            <div class="modal-body bg-light">
+        
+                    <!--corpo cadastro-->
+                <form action="/insert" method="post">
+                    <div class="form-outline mb-4">
+                        <input name="login" type="text" id="registerLogin" class="form-control" required/>
+                        <label class="form-label" for="registerLogin">Login</label>
+                    </div>
+                            
+                    <div class="form-outline mb-4">
+                        <input name="email" type="email" id="registerEmail" class="form-control" required/>
+                        <label class="form-label" for="registerEmail">Email</label>
+                    </div>
+        
+                    <div class="form-outline mb-4">
+                        <input name="password" type="password" id="registerPassword" class="form-control" required/>
+                        <label class="form-label" for="registerPassword">Senha</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input name="endereco" type="text" id="registerEndereco" class="form-control" required/>
+                        <label class="form-label" for="registerEndereco">Endereço</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input name="contato" type="tel" id="registerContato" class="form-control" required/>
+                        <label class="form-label" for="registerContato">Contato</label>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+            </div>  
+            </div>
+    </div>
+    
+</body>
+</html>

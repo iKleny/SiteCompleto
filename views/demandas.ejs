@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas demandas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    
+    <script src="/scripts/demandaScript.js" defer></script>
+</head>
+<body>
+    <div class="border border-muted bg-dark">
+        <div class="d-flex justify-content-end">
+            <a href="/logout" class="btn btn-danger me-2 mt-2">Sair</a>
+            <a href="/verif" class="btn btn-primary me-2 mt-2">Voltar</a>
+        </div>
+        <div class="d-flex justify-content-center mt-2 mb-2">
+            <h2 class="text-white">Demandas</h2>
+        </div>
+        
+    </div>
+
+    <div class="table-responsive-xl">
+        <table class="container table table-hover table-striped table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Atualizar</th>
+                    <th scope="col">Remover</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Qnt</th>
+                    <th scope="col">Pagamento</th>
+                    <th scope="col">Contato</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Pedido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < array.length; i++) { %>
+                    <tr>
+                        <td><a id="<%= array[i].id %>" class="atualizar btn btn-sm btn-white btn-outline-primary text-white" data-bs-toggle="modal" data-bs-target="#attDemandas"><svg id="<%= array[i].id %>" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                            <path id="<%= array[i].id %>" d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                            </svg></a>
+                        </td>
+
+                        <td><a class="btn btn-sm btn-white btn-outline-danger text-white" href="/deletePedido/<%= array[i].id %>"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                            </svg></a>
+                        </td>
+
+                        <td class="text-capitalize"><%= array[i].login %></td>
+                        <td class="text-capitalize"><%= array[i].produto %></td>
+                        <td><%= array[i].valor %></td>
+                        <td><%= array[i].quantidade %></td>
+                        <td class="text-capitalize"><%= array[i].pagamento %></td>
+                        <td><%= array[i].contato %></td>
+                        <td><%= array[i].endereco %></td>
+                        <td class="text-capitalize"><%= array[i].pedido %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!--ATUALIZAR DEMANDA-->
+    <div class="modal fade" id="attDemandas" tabindex="-1" role="dialog" aria-labelledby="cardModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cardModalLabel">Atualizar</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="cardContent">
+                    <form action="/updateDemandas" method="post">
+                        <input type="hidden" name="id" id="id">
+                        <select class="form-select" name="select">
+                            <option value="a caminho">A caminho</option>
+                            <option value="entregue">Entregue</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                        <hr>
+                        <button type="submit" class="btn btn-dark">Atualizar Pedido</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
