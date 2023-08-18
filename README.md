@@ -1,2 +1,2 @@
 # SiteCompleto
- Site completo usando bootstrap, jquery, express
+ Site completo usando bootstrap, 100% responsivo, jquery e express
